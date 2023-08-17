@@ -93,7 +93,18 @@ const existsProductoByNombre = async ( req, res, next ) => {
     }
 };
 
+const coleccionesPermitidas = ( coleccion = '', colecciones = [] ) => {
+    const incluida = colecciones.includes(coleccion);
+
+    if( !incluida ) {
+        throw new Error(`La coleccion ${ coleccion } no es permitida. Colecciones permitidas: ${ colecciones }`);
+    }    
+
+    return true;
+}
+
 module.exports = {
+    coleccionesPermitidas,
     existsCategoriaById,
     existsCategoriaByNombre,
     existsProductoById,
